@@ -1,15 +1,10 @@
-/** @type {import('next').NextConfig} */
+import CaseSensitivePathsPlugin from 'case-sensitive-paths-webpack-plugin';
+
 const nextConfig = {
-  images: {
-    remotePatterns: [
-      {
-        protocol: 'https',
-        hostname: 'cdn.sanity.io',
-        port: '',
-        pathname: '/images/**',
-      },
-    ],
+  webpack(config) {
+    config.plugins.push(new CaseSensitivePathsPlugin());
+    return config;
   },
 };
 
-module.exports = nextConfig;
+export default nextConfig;
