@@ -2,9 +2,9 @@
 
 import { useEffect, useState } from "react";
 import Image from "next/image";
-import { client } from "src/sanity/lib/sanity.client";
+import { client } from "@/src/sanity/lib/sanity.client";
 import Link from "next/link"; 
-import { urlFor } from "src/sanity.image";
+import { urlFor } from "@/sanity.image";
 
 interface Blog {
   _id: string;
