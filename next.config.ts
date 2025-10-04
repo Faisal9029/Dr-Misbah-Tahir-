@@ -1,7 +1,16 @@
 import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
-  /* config options here */
+   // ✅ New way
+images: {
+  remotePatterns: [
+    {
+      protocol: "https",
+      hostname: "cdn.sanity.io",
+    },
+  ],
+},
+
 };
 
 export default nextConfig;
