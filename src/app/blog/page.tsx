@@ -2,8 +2,8 @@
 
 import { useEffect, useState } from "react";
 import Image from "next/image";
-import { client } from "@/src/sanity/lib/sanity.client";
-import { urlFor } from "@/sanity.image";
+import { client } from "src/sanity/lib/sanity.client";
+import { urlFor } from "src/sanity.image";
 
 export default function BlogPosters() {
   const [posts, setPosts] = useState<any[]>([]);
