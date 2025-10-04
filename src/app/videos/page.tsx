@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { client } from "@/sanity.client";
+import { client } from "@/src/sanity/lib/sanity.client";
 
 export default function VideosPage() {
   const [videos, setVideos] = useState<any[]>([]);
