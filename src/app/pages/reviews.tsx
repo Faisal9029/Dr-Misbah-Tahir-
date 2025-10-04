@@ -1,4 +1,4 @@
-import { sanityClient } from "@/src/sanity/lib/sanityClient";
+import { sanityClient } from "@/sanity/sanityClient";
 
 export default function Reviews({ reviews }: { reviews: any[] }) {
   return (

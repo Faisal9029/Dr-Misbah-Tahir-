@@ -1,4 +1,4 @@
-import { sanityClient } from "@/src/sanity/lib/sanityClient";
+import { sanityClient } from "@/sanity/sanityClient";
 
 export default function Blogs({ blogs }: { blogs: any[] }) {
   return (

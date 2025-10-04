@@ -3,7 +3,7 @@
 import { useEffect, useState } from "react";
 import Image from "next/image";
 import { motion } from "framer-motion";
-import { client } from "@/src/sanity/lib/sanity.client";
+import { client } from "@/sanity.client";
 
 type Review = {
   _id: string;

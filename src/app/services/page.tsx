@@ -2,7 +2,7 @@
 
 import { useState, useEffect } from "react";
 import Link from "next/link";
-import { client } from "@/src/sanity/lib/sanity.client";
+import { client } from "@/sanity.client";
 import { groq } from "next-sanity";
 
 type Procedure = {

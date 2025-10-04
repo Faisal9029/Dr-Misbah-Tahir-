@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import { useEffect, useState } from "react";
-import { client } from "@/src/sanity/lib/sanity.client";
+import { client } from "@/sanity.client";
 
 export default function LatestVideos() {
   const [homeVideos, setHomeVideos] = useState<any[]>([]);

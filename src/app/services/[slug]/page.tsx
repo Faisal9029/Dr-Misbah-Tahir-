@@ -1,5 +1,5 @@
 import { notFound } from "next/navigation";
-import { client } from "@/src/sanity/lib/sanity.client";
+import { client } from "@/sanity.client";
 import { groq } from "next-sanity";
 
 interface PageProps {

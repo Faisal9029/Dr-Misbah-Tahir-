@@ -1,5 +1,5 @@
 import Hero from "@/components/Hero";
-import Blog from "@/src/components/blog";
+import Blog from "@/components/Blog";
 import Reviews from "@/components/Reviews";
 import LatestVideos from "@/components/LatestVideos";
 import FloatingWhatsApp from "@/components/FloatingWhatsApp";
