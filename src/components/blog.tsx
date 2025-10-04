@@ -2,6 +2,7 @@
 
 import { useEffect, useState } from "react";
 import Image from "next/image";
+// Update the path below to where your Sanity client is actually exported from
 import { client } from "@/sanity.client";
 import Link from "next/link"; 
 import { urlFor } from "@/sanity.image";
