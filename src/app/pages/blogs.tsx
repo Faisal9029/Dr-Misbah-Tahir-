@@ -1,6 +1,6 @@
 import { sanityClient } from "@/sanity/sanityClient";
 
-export default function Blogs({ blogs }: { blogs: any[] }) {
+export default function blogs({ blogs }: { blogs: any[] }) {
   return (
     <div className="p-5">
       <h1 className="text-3xl font-bold mb-5">Blogs</h1>
