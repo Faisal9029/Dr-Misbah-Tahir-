@@ -54,7 +54,7 @@ export default function LatestReviews() {
 
         {/* ✅ Tagline nicely aligned */}
         <p className="text-center italic text-lg text-white/80 mb-12">
-          "Healing stories shared by those who trust us."
+          {"Healing stories shared by those who trust us."}
         </p>
 
         {/* ✅ Reviews Grid (only 3) */}

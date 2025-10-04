@@ -1,18 +1,9 @@
-/** @type {import('next').NextConfig} */
+import CaseSensitivePathsPlugin from 'case-sensitive-paths-webpack-plugin';
+
 const nextConfig = {
-  eslint: {
-    ignoreDuringBuilds: true,
-  },
-  images: {
-    remotePatterns: [
-      {
-        protocol: "https",
-        hostname: "cdn.sanity.io",
-      },
-    ],
-  },
-  experimental: {
-    largePageDataBytes: 256 * 1000,
+  webpack(config) {
+    config.plugins.push(new CaseSensitivePathsPlugin());
+    return config;
   },
 };
 

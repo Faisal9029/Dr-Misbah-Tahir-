@@ -1,5 +1,6 @@
 "use client";
 
+import Image from "next/image";
 import { FaFacebook, FaYoutube, FaLinkedin, FaInstagram, FaWhatsapp } from "react-icons/fa";
 
 export default function Footer() {
@@ -9,8 +10,11 @@ export default function Footer() {
     <>
       {/* Floating WhatsApp Button */}
       <a
-        href={`https://wa.me/${whatsappNumber}?text=${encodeURIComponent("Assalamualaikum, I would like to book an appointment with Dr. Misbah Tahir.")}`}
+        href={`https://wa.me/${whatsappNumber}?text=${encodeURIComponent(
+          "Assalamualaikum, I would like to book an appointment with Dr. Misbah Tahir."
+        )}`}
         target="_blank"
+        rel="noopener noreferrer"
         className="fixed bottom-6 right-6 z-50 bg-green-500 hover:bg-green-600 text-white w-14 h-14 rounded-full flex items-center justify-center shadow-lg transition-all"
       >
         <FaWhatsapp className="w-7 h-7" />
@@ -40,7 +44,13 @@ export default function Footer() {
               rel="noopener noreferrer"
               className="hover:scale-110 transition inline-flex"
             >
-              <img src="/tiktok-icon.png" alt="TikTok" className="w-6 h-6" />
+              <Image
+                src="/tiktok-icon.png"
+                alt="TikTok"
+                width={24}
+                height={24}
+                className="w-6 h-6"
+              />
             </a>
 
             <a
