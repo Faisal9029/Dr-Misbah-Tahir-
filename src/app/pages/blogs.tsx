@@ -1,4 +1,4 @@
-import { sanityClient } from "@/sanity/sanityClient";
+import { client } from "@/sanity/sanityClient";
 
 export default function blogs({ blogs }: { blogs: any[] }) {
   return (
@@ -17,6 +17,6 @@ export default function blogs({ blogs }: { blogs: any[] }) {
 }
 
 export async function getStaticProps() {
-  const blogs = await sanityClient.fetch(`*[_type == "blog"]`);
+  const blogs = await client.fetch(`*[_type == "blog"]`);
   return { props: { blogs } };
 }
