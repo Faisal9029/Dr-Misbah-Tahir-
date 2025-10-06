@@ -5,8 +5,8 @@ import { schema } from "./src/sanity/schema";
 export default defineConfig({
   name: "default",
   title: "My Project",
-  projectId: "w0fodn6b",
-  dataset: "production",
+  projectId: process.env.NEXT_PUBLIC_SANITY_PROJECT_ID!,
+  dataset: process.env.NEXT_PUBLIC_SANITY_DATASET!,
   plugins: [deskTool()],
   schema,
 });
