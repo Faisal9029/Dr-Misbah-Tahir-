@@ -2,7 +2,7 @@
 
 import { useEffect, useState } from "react";
 import Image from "next/image";
-import { client } from "@/sanity.client";
+import { client } from "@/sanity/sanityClient";
 import { urlFor } from "@/sanity.image";
 
 export default function BlogPosters() {
