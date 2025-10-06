@@ -1,4 +1,4 @@
-import { sanityClient } from "@/sanity/sanityClient";
+import { client } from "@/sanity/sanityClient";
 
 export default function Videos({ videos }: { videos: any[] }) {
   return (
@@ -17,6 +17,6 @@ export default function Videos({ videos }: { videos: any[] }) {
 }
 
 export async function getStaticProps() {
-  const videos = await sanityClient.fetch(`*[_type == "video"]`);
+  const videos = await client.fetch(`*[_type == "video"]`);
   return { props: { videos } };
 }
