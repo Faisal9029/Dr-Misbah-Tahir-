@@ -9,7 +9,7 @@ type Procedure = {
   _id: string;
   title: string;
   slug: { current: string };
-  department: string;
+  department?: string;
 };
 
 type Department = {
@@ -20,37 +20,55 @@ type Department = {
 export default function ServicesPage() {
   const [services, setServices] = useState<Department[]>([]);
   const [search, setSearch] = useState("");
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     const fetchProcedures = async () => {
-      const allProcedures: Procedure[] = await client.fetch(
-        groq`*[_type=="procedure"]{
-          _id,
-          title,
-          slug,
-          department
-        }`
-      );
+      try {
+        const allProcedures: Procedure[] = await client.fetch(
+          groq`*[_type=="procedure"]{
+            _id,
+            title,
+            slug,
+            department
+          }`
+        );
 
-      // Group by department
-      const grouped: Record<string, Procedure[]> = {};
-      allProcedures.forEach((proc) => {
-        if (!grouped[proc.department]) grouped[proc.department] = [];
-        grouped[proc.department].push(proc);
-      });
+        // ✅ Handle missing departments
+        allProcedures.forEach((p) => {
+          if (!p.department) p.department = "General";
+        });
 
-      const deptArray: Department[] = Object.keys(grouped).map((dept) => ({
-        name: dept,
-        procedures: grouped[dept],
-      }));
+        // ✅ Sort alphabetically by title
+        allProcedures.sort((a, b) => a.title.localeCompare(b.title));
 
-      setServices(deptArray);
+        // ✅ Group by department
+        const grouped: Record<string, Procedure[]> = {};
+        allProcedures.forEach((proc) => {
+          if (!grouped[proc.department!]) grouped[proc.department!] = [];
+          grouped[proc.department!].push(proc);
+        });
+
+        // ✅ Convert to array and sort departments alphabetically
+        const deptArray: Department[] = Object.keys(grouped)
+          .sort((a, b) => a.localeCompare(b))
+          .map((dept) => ({
+            name: dept,
+            procedures: grouped[dept],
+          }));
+
+        setServices(deptArray);
+      } catch (error) {
+        console.error("Error fetching procedures:", error);
+      } finally {
+        setLoading(false);
+      }
     };
 
     fetchProcedures();
   }, []);
 
-  // Filter search across department + procedure titles
+  // ✅ Filter by department or title
   const filteredServices = services.map((dept) => ({
     ...dept,
     procedures: dept.procedures.filter(
@@ -60,23 +78,33 @@ export default function ServicesPage() {
     ),
   }));
 
+  // ✅ Loading state
+  if (loading) {
+    return (
+      <section className="py-20 bg-blue-900 text-white text-center">
+        <p className="animate-pulse text-lg">Loading procedures...</p>
+      </section>
+    );
+  }
+
   return (
     <section className="relative py-20 bg-blue-900 text-white">
       <div className="max-w-7xl mx-auto px-6 lg:px-12">
         <h1 className="text-4xl font-bold text-center mb-12">Our Services</h1>
 
-        {/* Search bar */}
+        {/* 🔍 Search bar */}
         <div className="flex justify-center mb-10">
           <input
             type="text"
             placeholder="Search procedure or department..."
             value={search}
             onChange={(e) => setSearch(e.target.value)}
-            className="w-full max-w-lg px-4 py-3 rounded-full bg-white/10 border border-white/30 placeholder-white/70 focus:outline-none focus:border-blue-400"
+            className="w-full max-w-lg px-4 py-3 rounded-full bg-white/10 border border-white/30 
+                       placeholder-white/70 focus:outline-none focus:border-blue-400"
           />
         </div>
 
-        {/* Departments & Procedures */}
+        {/* 🏥 Departments & Procedures */}
         <div className="space-y-12">
           {filteredServices.map(
             (dept, i) =>
@@ -90,9 +118,11 @@ export default function ServicesPage() {
                       <Link
                         key={p._id}
                         href={`/services/${p.slug.current}`}
-                        className="p-6 rounded-2xl border border-white/20 bg-white/10 hover:border-blue-400 transition block text-center"
+                        className="p-6 rounded-2xl border border-white/10 bg-white/5 
+                                   hover:bg-white/15 hover:border-blue-400 transition 
+                                   block text-center backdrop-blur-sm"
                       >
-                        <h3 className="font-medium">{p.title}</h3>
+                        <h3 className="font-semibold text-lg">{p.title}</h3>
                       </Link>
                     ))}
                   </div>

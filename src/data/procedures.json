@@ -1,268 +1,97 @@
 [
   {
-    "id": 1,
+    "_type": "procedure",
     "title": "Cerebral Angiography",
-    "slug": "cerebral-angiography",
+    "slug": { "_type": "slug", "current": "cerebral-angiography" },
     "department": "Neuro Radiology",
     "description": "A diagnostic X-ray procedure that uses contrast dye to visualize cerebral arteries and veins.",
-    "indications": [
-      "Stroke evaluation",
-      "Intracranial aneurysm",
-      "Vascular malformations"
-    ],
-    "risks": [
-      "Contrast allergy",
-      "Bleeding at puncture site",
-      "Rare risk of stroke"
-    ],
+    "indications": ["Stroke evaluation", "Intracranial aneurysm", "Vascular malformations"],
+    "risks": ["Contrast allergy", "Bleeding at puncture site", "Rare risk of stroke"],
     "faqs": [
-      {
-        "question": "How long does the test take?",
-        "answer": "Usually 30–60 minutes depending on complexity."
-      },
-      {
-        "question": "Is it painful?",
-        "answer": "Only mild discomfort at puncture site with local anesthesia."
-      }
-    ]
+      { "question": "How long does the test take?", "answer": "Usually 30–60 minutes depending on complexity." },
+      { "question": "Is it painful?", "answer": "Only mild discomfort at puncture site with local anesthesia." }
+    ],
+    "image": { "_type": "image", "asset": { "_ref": "image-cerebral-angiography", "_type": "reference" } },
+    "seo": {
+      "metaTitle": "Cerebral Angiography | Neuro Radiology",
+      "metaDescription": "Learn how Cerebral Angiography helps diagnose brain vessel disorders like stroke and aneurysm with precision imaging.",
+      "keywords": ["Cerebral Angiography", "Stroke Diagnosis", "Brain Angiogram"]
+    }
   },
   {
-    "id": 2,
+    "_type": "procedure",
     "title": "Carotid Artery Stenting",
-    "slug": "carotid-artery-stenting",
+    "slug": { "_type": "slug", "current": "carotid-artery-stenting" },
     "department": "Neuro Radiology",
     "description": "Minimally invasive placement of a stent in the carotid artery to prevent stroke.",
-    "indications": [
-      "Carotid artery stenosis",
-      "Stroke prevention",
-      "Recurrent TIAs"
-    ],
-    "risks": [
-      "Stroke during procedure",
-      "Artery re-narrowing",
-      "Bleeding or bruising"
-    ],
+    "indications": ["Carotid artery stenosis", "Stroke prevention", "Recurrent TIAs"],
+    "risks": ["Stroke during procedure", "Artery re-narrowing", "Bleeding or bruising"],
     "faqs": [
-      {
-        "question": "Do I need general anesthesia?",
-        "answer": "No, the procedure is usually done under local anesthesia."
-      },
-      {
-        "question": "How long is hospital stay?",
-        "answer": "Most patients are discharged within 1–2 days."
-      }
-    ]
+      { "question": "Do I need general anesthesia?", "answer": "No, the procedure is usually done under local anesthesia." },
+      { "question": "How long is hospital stay?", "answer": "Most patients are discharged within 1–2 days." }
+    ],
+    "image": { "_type": "image", "asset": { "_ref": "image-carotid-stent", "_type": "reference" } },
+    "seo": {
+      "metaTitle": "Carotid Artery Stenting | Stroke Prevention",
+      "metaDescription": "Carotid Artery Stenting opens narrowed arteries in the neck to restore blood flow and reduce stroke risk.",
+      "keywords": ["Carotid Stenting", "Stroke Prevention", "Vascular Treatment"]
+    }
   },
   {
-    "id": 3,
+    "_type": "procedure",
     "title": "Intracranial Aneurysm Coiling",
-    "slug": "intracranial-aneurysm-coiling",
+    "slug": { "_type": "slug", "current": "intracranial-aneurysm-coiling" },
     "department": "Neuro Radiology",
     "description": "Endovascular placement of coils to block blood flow into an aneurysm and prevent rupture.",
-    "indications": [
-      "Unruptured cerebral aneurysm",
-      "Ruptured aneurysm causing subarachnoid hemorrhage"
-    ],
-    "risks": [
-      "Stroke",
-      "Aneurysm rupture",
-      "Vessel injury"
-    ],
+    "indications": ["Unruptured cerebral aneurysm", "Ruptured aneurysm causing subarachnoid hemorrhage"],
+    "risks": ["Stroke", "Aneurysm rupture", "Vessel injury"],
     "faqs": [
-      {
-        "question": "Are coils permanent?",
-        "answer": "Yes, they remain inside permanently."
-      },
-      {
-        "question": "Is it safer than surgery?",
-        "answer": "In many cases, yes. It is less invasive than open surgery."
-      }
-    ]
+      { "question": "Are coils permanent?", "answer": "Yes, they remain inside permanently." },
+      { "question": "Is it safer than surgery?", "answer": "In many cases, yes. It is less invasive than open surgery." }
+    ],
+    "image": { "_type": "image", "asset": { "_ref": "image-aneurysm-coiling", "_type": "reference" } },
+    "seo": {
+      "metaTitle": "Intracranial Aneurysm Coiling | Minimally Invasive Brain Treatment",
+      "metaDescription": "Learn how coiling treats brain aneurysms safely without open surgery through neurointerventional radiology.",
+      "keywords": ["Aneurysm Coiling", "Brain Aneurysm", "Endovascular Treatment"]
+    }
   },
   {
-    "id": 4,
+    "_type": "procedure",
     "title": "AVM Embolization",
-    "slug": "avm-embolization",
+    "slug": { "_type": "slug", "current": "avm-embolization" },
     "department": "Neuro Radiology",
     "description": "Minimally invasive procedure to block abnormal blood vessels in the brain (arteriovenous malformations).",
-    "indications": [
-      "Brain AVM",
-      "Seizures due to AVM",
-      "Bleeding risk reduction"
-    ],
-    "risks": [
-      "Stroke",
-      "Bleeding",
-      "Recurrence of AVM"
-    ],
+    "indications": ["Brain AVM", "Seizures due to AVM", "Bleeding risk reduction"],
+    "risks": ["Stroke", "Bleeding", "Recurrence of AVM"],
     "faqs": [
-      {
-        "question": "Can AVM be cured with embolization?",
-        "answer": "Sometimes yes, but often it is combined with surgery or radiosurgery."
-      },
-      {
-        "question": "How long is recovery?",
-        "answer": "Usually a few days depending on complexity."
-      }
-    ]
+      { "question": "Can AVM be cured with embolization?", "answer": "Sometimes yes, but often it is combined with surgery or radiosurgery." },
+      { "question": "How long is recovery?", "answer": "Usually a few days depending on complexity." }
+    ],
+    "image": { "_type": "image", "asset": { "_ref": "image-avm-embolization", "_type": "reference" } },
+    "seo": {
+      "metaTitle": "AVM Embolization | Brain AVM Treatment",
+      "metaDescription": "Treat brain AVMs through minimally invasive embolization to prevent bleeding and seizures.",
+      "keywords": ["AVM Embolization", "Brain AVM", "Neuro Radiology Treatment"]
+    }
   },
   {
-    "id": 5,
+    "_type": "procedure",
     "title": "Mechanical Thrombectomy",
-    "slug": "mechanical-thrombectomy",
+    "slug": { "_type": "slug", "current": "mechanical-thrombectomy" },
     "department": "Neuro Radiology",
     "description": "An emergency procedure to remove a blood clot from a brain artery in acute ischemic stroke.",
-    "indications": [
-      "Acute ischemic stroke",
-      "Large vessel occlusion"
-    ],
-    "risks": [
-      "Bleeding in the brain",
-      "Artery injury",
-      "Stroke worsening"
-    ],
+    "indications": ["Acute ischemic stroke", "Large vessel occlusion"],
+    "risks": ["Bleeding in the brain", "Artery injury", "Stroke worsening"],
     "faqs": [
-      {
-        "question": "What is the time window?",
-        "answer": "Usually effective within 6–24 hours of stroke onset."
-      },
-      {
-        "question": "Does it reverse paralysis?",
-        "answer": "It can improve recovery chances significantly."
-      }
-    ]
-  },
-  {
-    "id": 6,
-    "title": "Spinal Angiography",
-    "slug": "spinal-angiography",
-    "department": "Neuro Radiology",
-    "description": "Imaging of spinal cord blood vessels using contrast and X-rays.",
-    "indications": [
-      "Spinal AVM",
-      "Dural AV fistula",
-      "Unexplained spinal bleeding"
+      { "question": "What is the time window?", "answer": "Usually effective within 6–24 hours of stroke onset." },
+      { "question": "Does it reverse paralysis?", "answer": "It can improve recovery chances significantly." }
     ],
-    "risks": [
-      "Contrast reaction",
-      "Spinal cord ischemia",
-      "Bleeding at puncture site"
-    ],
-    "faqs": [
-      {
-        "question": "Is it risky?",
-        "answer": "It has some risk but is very safe in expert hands."
-      },
-      {
-        "question": "Does it need admission?",
-        "answer": "Yes, usually for observation overnight."
-      }
-    ]
-  },
-  {
-    "id": 7,
-    "title": "Vertebroplasty",
-    "slug": "vertebroplasty",
-    "department": "Neuro Radiology",
-    "description": "Injection of bone cement into fractured vertebra to relieve pain and stabilize spine.",
-    "indications": [
-      "Osteoporotic compression fracture",
-      "Spinal metastasis",
-      "Painful vertebral fracture"
-    ],
-    "risks": [
-      "Cement leakage",
-      "Nerve compression",
-      "Infection"
-    ],
-    "faqs": [
-      {
-        "question": "Does it relieve pain immediately?",
-        "answer": "Yes, many patients feel relief within 24 hours."
-      },
-      {
-        "question": "Is it done under general anesthesia?",
-        "answer": "No, usually local anesthesia with sedation."
-      }
-    ]
-  },
-  {
-    "id": 8,
-    "title": "Kyphoplasty",
-    "slug": "kyphoplasty",
-    "department": "Neuro Radiology",
-    "description": "A balloon is inserted into collapsed vertebra and filled with cement to restore height and stability.",
-    "indications": [
-      "Osteoporotic vertebral collapse",
-      "Spinal fractures causing deformity"
-    ],
-    "risks": [
-      "Balloon rupture",
-      "Cement leakage",
-      "Infection"
-    ],
-    "faqs": [
-      {
-        "question": "Is it better than vertebroplasty?",
-        "answer": "Kyphoplasty restores vertebral height, while vertebroplasty does not."
-      },
-      {
-        "question": "Is hospital stay required?",
-        "answer": "Most cases are discharged next day."
-      }
-    ]
-  },
-  {
-    "id": 9,
-    "title": "CSF Leak Repair",
-    "slug": "csf-leak-repair",
-    "department": "Neuro Radiology",
-    "description": "Minimally invasive repair of cerebrospinal fluid leaks using targeted sealants or patches.",
-    "indications": [
-      "Spinal CSF leak",
-      "Persistent headache",
-      "Post-surgical leak"
-    ],
-    "risks": [
-      "Infection",
-      "Failure of seal",
-      "Nerve irritation"
-    ],
-    "faqs": [
-      {
-        "question": "What are symptoms of CSF leak?",
-        "answer": "Severe positional headaches, nausea, clear nasal discharge."
-      },
-      {
-        "question": "Is repair permanent?",
-        "answer": "Usually yes, though rare recurrences happen."
-      }
-    ]
-  },
-  {
-    "id": 10,
-    "title": "Brain Tumor Embolization",
-    "slug": "brain-tumor-embolization",
-    "department": "Neuro Radiology",
-    "description": "Blocking blood supply to brain tumors before surgery to reduce bleeding risk.",
-    "indications": [
-      "Highly vascular brain tumors",
-      "Pre-operative blood loss reduction"
-    ],
-    "risks": [
-      "Stroke",
-      "Infarction of normal brain",
-      "Bleeding"
-    ],
-    "faqs": [
-      {
-        "question": "Does it cure the tumor?",
-        "answer": "No, it reduces bleeding during surgery."
-      },
-      {
-        "question": "How long before surgery is it done?",
-        "answer": "Usually within 1–2 days before surgery."
-      }
-    ]
+    "image": { "_type": "image", "asset": { "_ref": "image-thrombectomy", "_type": "reference" } },
+    "seo": {
+      "metaTitle": "Mechanical Thrombectomy | Stroke Clot Removal",
+      "metaDescription": "A life-saving treatment that removes brain clots and restores blood flow during acute stroke.",
+      "keywords": ["Mechanical Thrombectomy", "Stroke Treatment", "Clot Removal"]
+    }
   }
 ]

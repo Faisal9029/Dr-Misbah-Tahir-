@@ -40,8 +40,8 @@ export default function About() {
           
           <div className="space-y-4">
             <p className="text-lg leading-relaxed text-gray-200">
-              <b>Dr. Muhammad Misbah Tahir</b> is an accomplished <b>Associate Professor of Radiology & Imaging</b> 
-              at <b>Liaquat National Hospital & Medical College</b>, bringing over <b>15 years of specialized expertise</b> 
+              <b>Dr. Muhammad Misbah Tahir</b> is an accomplished <b>Associate Professor of Radiology & Imaging </b> 
+              at <b>Liaquat National Hospital & Medical College</b>, bringing over <b>15 years of specialized expertise </b> 
               in Interventional Radiology.
             </p>
             
@@ -52,7 +52,7 @@ export default function About() {
             </p>
             
             <p className="text-lg leading-relaxed text-gray-200">
-              Dr. Muhammad Misbah Tahir has served as the <b>Section Incharge of Interventional Radiology at Liaquat National Hospital</b> 
+              Dr. Muhammad Misbah Tahir has been serving as the <b>Section Incharge of Interventional Radiology at Liaquat National Hospital </b> 
               for more than 15 years, leading one of the most advanced IR departments in the country and 
               training the next generation of interventional radiologists.
             </p>
