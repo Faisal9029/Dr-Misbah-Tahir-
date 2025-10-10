@@ -1,82 +1,76 @@
 "use client";
 
-export default function ProcedureContent({ procedure }: { procedure: any }) {
+import { useEffect, useState } from "react";
+import { client } from "@/sanity.client";
+import Image from "next/image";
+import { groq } from "next-sanity";
+
+const procedureQuery = groq`
+  *[_type == "procedure" && slug.current == $slug][0]{
+    title,
+    shortDescription,
+    content,
+    image {
+      asset->{
+        url
+      }
+    }
+  }
+`;
+
+export default function ProcedureContent({ slug }: { slug: string }) {
+  const [procedure, setProcedure] = useState<any>(null);
+
+  useEffect(() => {
+    if (!slug) return;
+    client.fetch(procedureQuery, { slug }).then(setProcedure);
+  }, [slug]);
+
+  // 🟦 Loading State
+  if (!procedure) {
+    return (
+      <div className="flex flex-col items-center justify-center py-24 text-center">
+        <div className="animate-pulse text-blue-500 text-xl font-semibold">Loading...</div>
+      </div>
+    );
+  }
+
   return (
     <div className="max-w-5xl mx-auto px-6 lg:px-10 space-y-12 text-gray-700">
+      {/* 🟣 Title */}
+      <h1 className="text-4xl font-extrabold text-center bg-gradient-to-r from-blue-600 via-purple-600 to-blue-600 bg-clip-text text-transparent">
+        {procedure.title || "Untitled Procedure"}
+      </h1>
+
+      {/* 🖼️ Image Centered */}
+      {procedure.image?.asset?.url && (
+        <div className="flex justify-center">
+          <div className="rounded-3xl overflow-hidden shadow-2xl w-full sm:w-2/3">
+            <Image
+              src={procedure.image.asset.url}
+              alt={procedure.title || "Procedure Image"}
+              width={800}
+              height={500}
+              className="w-full h-auto object-cover"
+            />
+          </div>
+        </div>
+      )}
+
+      {/* 📝 Short Description */}
+      {procedure.shortDescription && (
+        <p className="text-lg leading-relaxed text-center text-gray-800">
+          {procedure.shortDescription}
+        </p>
+      )}
+
+      {/* 📘 Main Content */}
       {procedure.content && (
         <div className="bg-gradient-to-r from-blue-200 via-purple-200 to-blue-100 rounded-2xl p-8">
-          <h2 className="text-3xl font-bold text-purple-800 mb-4">Detailed Content</h2>
-          <p className="text-lg leading-relaxed">{procedure.content}</p>
-        </div>
-      )}
-
-      {procedure.benefits && (
-        <div className="bg-gradient-to-r from-purple-200 via-blue-200 to-purple-100 rounded-2xl p-8">
-          <h2 className="text-3xl font-bold text-purple-800 mb-4">Benefits</h2>
-          <p className="text-lg leading-relaxed">{procedure.benefits}</p>
-        </div>
-      )}
-
-      {procedure.preparation && (
-        <div className="bg-gradient-to-r from-blue-200 via-purple-200 to-blue-100 rounded-2xl p-8">
-          <h2 className="text-3xl font-bold text-purple-800 mb-4">Preparation</h2>
-          <p className="text-lg leading-relaxed">{procedure.preparation}</p>
-        </div>
-      )}
-
-      {procedure.recovery && (
-        <div className="bg-gradient-to-r from-purple-200 via-blue-200 to-purple-100 rounded-2xl p-8">
-          <h2 className="text-3xl font-bold text-purple-800 mb-4">Recovery</h2>
-          <p className="text-lg leading-relaxed">{procedure.recovery}</p>
-        </div>
-      )}
-
-      {procedure.duration && (
-        <div className="bg-gradient-to-r from-purple-200 via-blue-200 to-purple-100 rounded-2xl p-8">
-          <h2 className="text-3xl font-bold text-purple-800 mb-4">Duration</h2>
-          <p className="text-lg leading-relaxed">{procedure.duration}</p>
-        </div>
-      )}
-
-      {procedure.anesthesia && (
-        <div className="bg-gradient-to-r from-blue-200 via-purple-200 to-blue-100 rounded-2xl p-8">
-          <h2 className="text-3xl font-bold text-purple-800 mb-4">Anesthesia</h2>
-          <p className="text-lg leading-relaxed">{procedure.anesthesia}</p>
-        </div>
-      )}
-
-      {procedure.indications?.length > 0 && (
-        <div className="bg-gradient-to-r from-purple-200 via-blue-200 to-purple-100 rounded-2xl p-8">
-          <h2 className="text-3xl font-bold text-purple-800 mb-4">Indications</h2>
-          <ul className="list-disc pl-5 space-y-2">
-            {procedure.indications.map((ind: string, idx: number) => (
-              <li key={idx}>{ind}</li>
-            ))}
-          </ul>
-        </div>
-      )}
-
-      {procedure.risks?.length > 0 && (
-        <div className="bg-gradient-to-r from-blue-200 via-purple-200 to-blue-100 rounded-2xl p-8">
-          <h2 className="text-3xl font-bold text-purple-800 mb-4">Risks</h2>
-          <ul className="list-disc pl-5 space-y-2">
-            {procedure.risks.map((risk: string, idx: number) => (
-              <li key={idx}>{risk}</li>
-            ))}
-          </ul>
-        </div>
-      )}
-
-      {procedure.faqs?.length > 0 && (
-        <div className="bg-gradient-to-r from-purple-200 via-blue-200 to-purple-100 rounded-2xl p-8">
-          <h2 className="text-3xl font-bold text-purple-800 mb-4">FAQs</h2>
-          <ul className="list-disc pl-5 space-y-2">
-            {procedure.faqs.map((faq: any, idx: number) => (
-              <li key={idx}>
-                <strong>{faq.question}</strong> - {faq.answer}
-              </li>
-            ))}
-          </ul>
+          <h2 className="text-3xl font-bold text-purple-800 mb-4">Detailed Information</h2>
+          <p className="text-lg leading-relaxed text-gray-800 whitespace-pre-line">
+            {procedure.content}
+          </p>
         </div>
       )}
     </div>
