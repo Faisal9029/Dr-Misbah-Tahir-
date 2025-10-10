@@ -1,12 +1,21 @@
-import { client } from "@/sanity.client";
 import { groq } from "next-sanity";
+import { client } from "@/sanity.client";
 import Image from "next/image";
 
+// 🧠 Generate Static Slugs for Netlify build
+export async function generateStaticParams() {
+  const slugs = await client.fetch(groq`
+    *[_type == "procedure" && defined(slug.current)][].slug.current
+  `);
+  return slugs.map((slug: string) => ({ slug }));
+}
+
+// 🧩 Sanity GROQ Query
 const procedureQuery = groq`
   *[_type == "procedure" && slug.current == $slug][0]{
     title,
-    description,
     department,
+    description,
     content,
     benefits,
     preparation,
@@ -16,12 +25,19 @@ const procedureQuery = groq`
     indications,
     risks,
     faqs[] {
-      _key,
       question,
       answer
     },
-    "imageUrl": image.asset->url,
-    "imageAlt": image.alt
+    seo {
+      metaTitle,
+      metaDescription,
+      keywords
+    },
+    image {
+      asset->{
+        url
+      }
+    }
   }
 `;
 
@@ -39,23 +55,30 @@ export default async function ProcedurePage({ params }: { params: { slug: string
   }
 
   return (
-    <section className="bg-gradient-to-b from-blue-50 via-purple-50 to-blue-100 py-24">
+    <section className="bg-gradient-to-b from-blue-50 via-purple-50 to-blue-100 py-20">
       <div className="max-w-6xl mx-auto px-6 lg:px-12 space-y-16">
-        {/* Header Section */}
+        {/* 🟣 Header Section */}
         <div className="text-center space-y-4">
           <h1 className="text-5xl md:text-6xl font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-blue-700 via-purple-700 to-blue-600">
             {procedure.title}
           </h1>
-          <p className="text-gray-700 text-lg max-w-3xl mx-auto">{procedure.description}</p>
+          {procedure.department && (
+            <p className="text-lg text-blue-800 font-semibold">
+              Department: {procedure.department}
+            </p>
+          )}
+          {procedure.description && (
+            <p className="text-gray-700 text-lg max-w-3xl mx-auto">{procedure.description}</p>
+          )}
         </div>
 
-        {/* Image */}
-        {procedure.imageUrl && (
+        {/* 🖼️ Image */}
+        {procedure.image?.asset?.url && (
           <div className="flex justify-center">
             <div className="relative w-full sm:w-2/3 h-[400px] rounded-3xl overflow-hidden shadow-2xl">
               <Image
-                src={procedure.imageUrl}
-                alt={procedure.imageAlt || procedure.title}
+                src={procedure.image.asset.url}
+                alt={procedure.title}
                 fill
                 className="object-cover"
               />
@@ -63,12 +86,12 @@ export default async function ProcedurePage({ params }: { params: { slug: string
           </div>
         )}
 
-        {/* Info Section */}
+        {/* 📘 Details Section */}
         <div className="bg-gradient-to-r from-blue-100 via-purple-100 to-blue-50 rounded-3xl shadow-xl p-10 space-y-8 text-gray-800">
           {procedure.content && (
             <div>
               <h2 className="text-3xl font-bold text-purple-800 mb-3">Detailed Overview</h2>
-              <p className="leading-relaxed">{procedure.content}</p>
+              <p className="leading-relaxed whitespace-pre-line">{procedure.content}</p>
             </div>
           )}
 
@@ -107,27 +130,37 @@ export default async function ProcedurePage({ params }: { params: { slug: string
             </div>
           )}
 
-          {procedure.indications && (
+          {/* 🧾 Indications */}
+          {procedure.indications && procedure.indications.length > 0 && (
             <div>
               <h3 className="text-2xl font-semibold text-blue-700 mb-2">Indications</h3>
-              <p>{procedure.indications}</p>
+              <ul className="list-disc list-inside space-y-1">
+                {procedure.indications.map((item: string, i: number) => (
+                  <li key={i}>{item}</li>
+                ))}
+              </ul>
             </div>
           )}
 
-          {procedure.risks && (
+          {/* ⚠️ Risks */}
+          {procedure.risks && procedure.risks.length > 0 && (
             <div>
-              <h3 className="text-2xl font-semibold text-blue-700 mb-2">Risks</h3>
-              <p>{procedure.risks}</p>
+              <h3 className="text-2xl font-semibold text-red-700 mb-2">Risks</h3>
+              <ul className="list-disc list-inside space-y-1">
+                {procedure.risks.map((item: string, i: number) => (
+                  <li key={i}>{item}</li>
+                ))}
+              </ul>
             </div>
           )}
 
-          {/* ✅ FAQ Section Fixed */}
+          {/* 💬 FAQs */}
           {procedure.faqs && procedure.faqs.length > 0 && (
             <div>
               <h3 className="text-3xl font-bold text-purple-800 mb-4">FAQs</h3>
               <div className="space-y-6">
-                {procedure.faqs.map((faq: any) => (
-                  <div key={faq._key} className="bg-white rounded-xl shadow-md p-6">
+                {procedure.faqs.map((faq: any, i: number) => (
+                  <div key={i} className="bg-white rounded-xl shadow-md p-6">
                     <h4 className="text-xl font-semibold text-blue-700">{faq.question}</h4>
                     <p className="text-gray-700 mt-2">{faq.answer}</p>
                   </div>
@@ -136,6 +169,14 @@ export default async function ProcedurePage({ params }: { params: { slug: string
             </div>
           )}
         </div>
+
+        {/* 🧠 SEO Data (Optional - For Future) */}
+        {procedure.seo?.metaTitle && (
+          <div className="text-sm text-center text-gray-500">
+            <p>SEO Title: {procedure.seo.metaTitle}</p>
+            <p>Description: {procedure.seo.metaDescription}</p>
+          </div>
+        )}
       </div>
     </section>
   );
