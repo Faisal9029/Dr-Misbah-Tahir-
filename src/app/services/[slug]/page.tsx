@@ -1,11 +1,11 @@
+import Image from "next/image";
 import { client } from "@/sanity.client";
 import { groq } from "next-sanity";
-import { notFound } from "next/navigation";
 import ProcedureContent from "@/components/ProcedureContent";
+import { notFound } from "next/navigation";
 
-// ✅ GROQ query for a single procedure
 const procedureQuery = groq`
-  *[_type == "procedure" && slug.current == $slug][0]{
+  *[_type=="procedure" && slug.current==$slug][0]{
     _id,
     title,
     slug,
@@ -21,12 +21,7 @@ const procedureQuery = groq`
     risks,
     faqs,
     "imageUrl": image.asset->url,
-    "imageAlt": image.alt,
-    seo{
-      metaTitle,
-      metaDescription,
-      keywords
-    }
+    "imageAlt": image.alt
   }
 `;
 
@@ -35,20 +30,20 @@ export async function generateMetadata({ params }: { params: { slug: string } })
   if (!data) return { title: "Procedure Not Found" };
 
   return {
-    title: data.seo?.metaTitle || data.title,
-    description: data.seo?.metaDescription || data.description,
-    keywords: data.seo?.keywords || ["procedure", "healthcare", "services"],
+    title: data.title,
+    description: data.description,
   };
 }
 
 export default async function ProcedurePage({ params }: { params: { slug: string } }) {
   const procedure = await client.fetch(procedureQuery, { slug: params.slug });
+
   if (!procedure) return notFound();
 
   return (
     <section className="bg-gradient-to-b from-blue-50 via-purple-50 to-blue-100 py-24">
       <div className="max-w-6xl mx-auto px-6 lg:px-12">
-        {/* Hero Section */}
+        {/* Header */}
         <div className="text-center mb-16">
           <h1 className="text-5xl md:text-6xl font-extrabold text-purple-800 mb-4">
             {procedure.title}
@@ -57,19 +52,21 @@ export default async function ProcedurePage({ params }: { params: { slug: string
             {procedure.description}
           </p>
 
-          {/* Centered Image */}
+          {/* Center Image */}
           {procedure.imageUrl && (
             <div className="relative w-full max-w-3xl h-[400px] mx-auto mt-8 rounded-3xl overflow-hidden shadow-2xl">
-              <img
+              <Image
                 src={procedure.imageUrl}
                 alt={procedure.imageAlt || procedure.title}
+                width={1200}
+                height={800}
                 className="w-full h-full object-cover"
               />
             </div>
           )}
         </div>
 
-        {/* Procedure Content */}
+        {/* Content */}
         <ProcedureContent procedure={procedure} />
       </div>
     </section>
