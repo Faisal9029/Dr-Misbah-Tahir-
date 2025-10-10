@@ -2,15 +2,15 @@ import { groq } from "next-sanity";
 import { client } from "@/sanity.client";
 import Image from "next/image";
 
-// 🧠 Generate Static Slugs for Netlify build
+// ✅ Generate Static Slugs for Netlify build (SSG)
 export async function generateStaticParams() {
-  const slugs = await client.fetch(groq`
+  const slugs: string[] = await client.fetch(groq`
     *[_type == "procedure" && defined(slug.current)][].slug.current
   `);
-  return slugs.map((slug: string) => ({ slug }));
+  return slugs.map((slug) => ({ slug }));
 }
 
-// 🧩 Sanity GROQ Query
+// ✅ Sanity GROQ Query
 const procedureQuery = groq`
   *[_type == "procedure" && slug.current == $slug][0]{
     title,
@@ -41,8 +41,15 @@ const procedureQuery = groq`
   }
 `;
 
-export default async function ProcedurePage({ params }: { params: { slug: string } }) {
-  const { slug } = params;
+// ✅ Type-safe page props
+type ProcedureProps = {
+  params: Promise<{ slug: string }>;
+};
+
+// ✅ Main Component
+export default async function ProcedurePage({ params }: ProcedureProps) {
+  const { slug } = await params; // ✅ Await params to fix Netlify build type issue
+
   const procedure = await client.fetch(procedureQuery, { slug });
 
   if (!procedure) {
@@ -86,7 +93,7 @@ export default async function ProcedurePage({ params }: { params: { slug: string
           </div>
         )}
 
-        {/* 📘 Details Section */}
+        {/* 📘 All Details */}
         <div className="bg-gradient-to-r from-blue-100 via-purple-100 to-blue-50 rounded-3xl shadow-xl p-10 space-y-8 text-gray-800">
           {procedure.content && (
             <div>
@@ -130,7 +137,6 @@ export default async function ProcedurePage({ params }: { params: { slug: string
             </div>
           )}
 
-          {/* 🧾 Indications */}
           {procedure.indications && procedure.indications.length > 0 && (
             <div>
               <h3 className="text-2xl font-semibold text-blue-700 mb-2">Indications</h3>
@@ -142,7 +148,6 @@ export default async function ProcedurePage({ params }: { params: { slug: string
             </div>
           )}
 
-          {/* ⚠️ Risks */}
           {procedure.risks && procedure.risks.length > 0 && (
             <div>
               <h3 className="text-2xl font-semibold text-red-700 mb-2">Risks</h3>
@@ -154,23 +159,23 @@ export default async function ProcedurePage({ params }: { params: { slug: string
             </div>
           )}
 
-          {/* 💬 FAQs */}
           {procedure.faqs && procedure.faqs.length > 0 && (
             <div>
               <h3 className="text-3xl font-bold text-purple-800 mb-4">FAQs</h3>
               <div className="space-y-6">
-                {procedure.faqs.map((faq: any, i: number) => (
-                  <div key={i} className="bg-white rounded-xl shadow-md p-6">
-                    <h4 className="text-xl font-semibold text-blue-700">{faq.question}</h4>
-                    <p className="text-gray-700 mt-2">{faq.answer}</p>
-                  </div>
-                ))}
+                {procedure.faqs.map(
+                  (faq: { question: string; answer: string }, i: number) => (
+                    <div key={i} className="bg-white rounded-xl shadow-md p-6">
+                      <h4 className="text-xl font-semibold text-blue-700">{faq.question}</h4>
+                      <p className="text-gray-700 mt-2">{faq.answer}</p>
+                    </div>
+                  )
+                )}
               </div>
             </div>
           )}
         </div>
 
-        {/* 🧠 SEO Data (Optional - For Future) */}
         {procedure.seo?.metaTitle && (
           <div className="text-sm text-center text-gray-500">
             <p>SEO Title: {procedure.seo.metaTitle}</p>
