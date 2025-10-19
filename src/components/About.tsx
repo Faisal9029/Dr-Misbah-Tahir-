@@ -63,7 +63,7 @@ export default function About() {
                   <FaAward className="text-amber-400 text-2xl" />
                   <div>
                     <div className="font-bold text-white">FCPS, VIR</div>
-                    <div className="text-blue-200 text-sm">Fellowship</div>
+                    <div className="text-black text-sm">Fellowship</div>
                   </div>
                 </div>
               </motion.div>
