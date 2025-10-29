@@ -1,0 +1,5 @@
+# Redirect www to non-www safely
+https://www.innovativemisbahtahir.com/*  https://innovativemisbahtahir.com/:splat  301
+
+# Redirect HTTP to HTTPS (only for main domain)
+http://innovativemisbahtahir.com/*  https://innovativemisbahtahir.com/:splat  301
