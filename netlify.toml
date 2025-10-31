@@ -1,3 +1,7 @@
+[build]
+  command = "npm run build"
+  publish = ".next"
+
 [[redirects]]
   from = "https://innovativemisbahtahir.com/*"
   to = "https://www.innovativemisbahtahir.com/:splat"
