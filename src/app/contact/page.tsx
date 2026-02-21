@@ -12,7 +12,7 @@ export default function ContactNMC() {
   const [sending, setSending] = useState(false);
 
   // ✅ Real WhatsApp Numbers
-  const whatsappNumbers = ["923158243395", "923082393881", "923003455626"];
+  const whatsappNumbers = ["923460807283", "923082393881", "923003455626"];
 
   // ✅ Message Template
   const messageTemplate = (nameVal: string, phoneVal: string, msgVal: string) =>
@@ -146,11 +146,11 @@ Thank you.`;
                   +92 300 3455626 (WhatsApp)
                 </a>
                 <a
-                  href={`https://wa.me/923158243395?text=${encodeURIComponent("Assalamualaikum, I would like to book an appointment with Dr. Misbah Tahir.")}`}
+                  href={`https://wa.me/923460807283?text=${encodeURIComponent("Assalamualaikum, I would like to book an appointment with Dr. Misbah Tahir.")}`}
                   target="_blank"
                   className="hover:text-green-400 transition block"
                 >
-                  +92 315 8243395 (WhatsApp)
+                  +92 346 0807283 (WhatsApp)
                 </a>
                 <a
                   href={`https://wa.me/923082393881?text=${encodeURIComponent("Assalamualaikum, I would like to book an appointment with Dr. Misbah Tahir.")}`}
