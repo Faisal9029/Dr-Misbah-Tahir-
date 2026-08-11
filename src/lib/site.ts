@@ -43,6 +43,4 @@ export const SOCIAL_LINKS = {
   facebook: "https://www.facebook.com/share/185ZnY9USS/",
   linkedin:
     "https://www.linkedin.com/in/dr-misbah-tahir-72013aa2?utm_source=share_via&utm_content=profile&utm_medium=member_android",
-  // TODO: swap this for Dr. Misbah's real Instagram profile URL when available
-  instagram: "https://www.instagram.com",
 };

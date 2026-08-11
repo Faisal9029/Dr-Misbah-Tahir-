@@ -1,7 +1,7 @@
 "use client";
 
 import Image from "next/image";
-import { FaFacebook, FaYoutube, FaLinkedin, FaInstagram } from "react-icons/fa";
+import { FaFacebook, FaYoutube, FaLinkedin } from "react-icons/fa";
 import { DOCTOR_NAME, SOCIAL_LINKS } from "@/lib/site";
 
 export default function Footer() {
@@ -48,16 +48,6 @@ export default function Footer() {
             className="hover:scale-110 transition inline-flex text-blue-400"
           >
             <FaLinkedin />
-          </a>
-
-          <a
-            href={SOCIAL_LINKS.instagram}
-            target="_blank"
-            rel="noopener noreferrer"
-            aria-label="Dr. Misbah Tahir on Instagram"
-            className="hover:scale-110 transition inline-flex text-pink-500"
-          >
-            <FaInstagram />
           </a>
 
           <a
