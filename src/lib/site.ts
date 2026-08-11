@@ -41,7 +41,8 @@ export const SOCIAL_LINKS = {
   youtube: "https://youtube.com/@misbahtahir-u1k?si=aHocmnlMtrECcGu5",
   tiktok: "https://www.tiktok.com/@dr.mmisbahtahir?_t=ZS-8zzv0Zf01YN&_r=1",
   facebook: "https://www.facebook.com/share/185ZnY9USS/",
-  // TODO: swap these for Dr. Misbah's real profile URLs when available
-  linkedin: "https://www.linkedin.com",
+  linkedin:
+    "https://www.linkedin.com/in/dr-misbah-tahir-72013aa2?utm_source=share_via&utm_content=profile&utm_medium=member_android",
+  // TODO: swap this for Dr. Misbah's real Instagram profile URL when available
   instagram: "https://www.instagram.com",
 };
