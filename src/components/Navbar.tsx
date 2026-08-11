@@ -70,8 +70,11 @@ export default function Navbar() {
 
         {/* Mobile Menu Button */}
         <button
+          type="button"
           className="md:hidden text-2xl text-gray-700 dark:text-gray-200"
           onClick={() => setOpen(!open)}
+          aria-label={open ? "Close menu" : "Open menu"}
+          aria-expanded={open}
         >
           {open ? <FaTimes /> : <FaBars />}
         </button>

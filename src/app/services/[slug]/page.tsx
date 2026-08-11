@@ -1,6 +1,7 @@
 import { groq } from "next-sanity";
 import { client } from "@/sanity.client";
 import Image from "next/image";
+import type { Metadata } from "next";
 
 // ✅ Generate Static Slugs for Netlify build (SSG)
 export async function generateStaticParams() {
@@ -45,6 +46,33 @@ const procedureQuery = groq`
 type ProcedureProps = {
   params: Promise<{ slug: string }>;
 };
+
+// ✅ Per-procedure SEO metadata (uses the Sanity "seo" fields instead of
+// just printing them on the page — this is what search engines actually read)
+export async function generateMetadata({ params }: ProcedureProps): Promise<Metadata> {
+  const { slug } = await params;
+  const procedure = await client.fetch(procedureQuery, { slug });
+
+  if (!procedure) {
+    return { title: "Procedure Not Found" };
+  }
+
+  const title = procedure.seo?.metaTitle || procedure.title;
+  const description =
+    procedure.seo?.metaDescription || procedure.description || undefined;
+
+  return {
+    title,
+    description,
+    keywords: procedure.seo?.keywords,
+    alternates: { canonical: `/services/${slug}` },
+    openGraph: {
+      title,
+      description,
+      images: procedure.image?.asset?.url ? [procedure.image.asset.url] : undefined,
+    },
+  };
+}
 
 // ✅ Main Component
 export default async function ProcedurePage({ params }: ProcedureProps) {
@@ -100,7 +128,6 @@ export default async function ProcedurePage({ params }: ProcedureProps) {
     </div>
   </div>
 )}
-
 
         {/* 📘 All Details */}
         <div className="bg-gradient-to-r from-blue-100 via-purple-100 to-blue-50 rounded-3xl shadow-xl p-10 space-y-8 text-gray-800">
@@ -205,12 +232,6 @@ export default async function ProcedurePage({ params }: ProcedureProps) {
           )}
         </div>
 
-        {procedure.seo?.metaTitle && (
-          <div className="text-sm text-center text-gray-500">
-            <p>SEO Title: {procedure.seo.metaTitle}</p>
-            <p>Description: {procedure.seo.metaDescription}</p>
-          </div>
-        )}
       </div>
     </section>
   );

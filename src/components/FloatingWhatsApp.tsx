@@ -2,11 +2,12 @@
 
 import { motion } from "framer-motion";
 import { FaWhatsapp } from "react-icons/fa";
+import { PRIMARY_WHATSAPP_NUMBER, whatsappLink } from "@/lib/site";
 
 export default function FloatingWhatsApp() {
   return (
     <motion.a
-      href="https://wa.me/923003455626?text=Hello%20Dr%20Misbah%2C%20I%20would%20like%20to%20book%20an%20appointment."
+      href={whatsappLink(PRIMARY_WHATSAPP_NUMBER)}
       target="_blank"
       rel="noopener noreferrer"
       aria-label="Chat on WhatsApp"

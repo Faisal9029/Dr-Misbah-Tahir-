@@ -88,15 +88,19 @@ export default function Hero() {
       {/* Prev/Next buttons */}
       <div className="absolute bottom-6 left-0 right-0 flex justify-center gap-6">
         <button
+          type="button"
           onClick={() => slider.current?.prev()}
-          className="px-4 py-2 rounded-full bg-gradient-to-r from-blue-500 to-purple-500 
+          aria-label="Previous slide"
+          className="px-4 py-2 rounded-full bg-gradient-to-r from-blue-500 to-purple-500
                      text-white shadow-md hover:opacity-90 transition"
         >
           ⬅
         </button>
         <button
+          type="button"
           onClick={() => slider.current?.next()}
-          className="px-4 py-2 rounded-full bg-gradient-to-r from-purple-500 to-blue-500 
+          aria-label="Next slide"
+          className="px-4 py-2 rounded-full bg-gradient-to-r from-purple-500 to-blue-500
                      text-white shadow-md hover:opacity-90 transition"
         >
           ➡

@@ -1,9 +1,18 @@
 import "./globals.css";
 import type { Metadata } from "next";
+import Script from "next/script";
 import { Poppins } from "next/font/google";
 import Navbar from "../components/Navbar";
 import FloatingWhatsApp from "../components/FloatingWhatsApp";
 import Footer from "../components/Footer";
+import Chatbot from "../components/Chatbot";
+import {
+  SITE_URL,
+  SITE_NAME,
+  SITE_DESCRIPTION,
+  DOCTOR_NAME,
+  CLINIC,
+} from "@/lib/site";
 
 // New modern font
 const poppins = Poppins({
@@ -11,9 +20,39 @@ const poppins = Poppins({
   weight: ["400", "500", "600", "700"],
 });
 
+const defaultTitle = `${SITE_NAME} | Interventional Radiologist in Karachi`;
+
 export const metadata: Metadata = {
-  title: "Dr. Muhammad Misbah Tahir",
-  description: "Official Medical Website of Dr. Misbah Tahir",
+  metadataBase: new URL(SITE_URL),
+  title: {
+    default: defaultTitle,
+    template: `%s | ${SITE_NAME}`,
+  },
+  description: SITE_DESCRIPTION,
+  keywords: [
+    "Dr Misbah Tahir",
+    "Interventional Radiologist Karachi",
+    "Interventional Radiology Pakistan",
+    "Vascular and Interventional Radiology",
+    "Liaquat National Hospital Radiologist",
+    "National Medical Centre Karachi",
+  ],
+  alternates: { canonical: "/" },
+  openGraph: {
+    type: "website",
+    locale: "en_PK",
+    url: SITE_URL,
+    siteName: SITE_NAME,
+    title: defaultTitle,
+    description: SITE_DESCRIPTION,
+    images: [{ url: "/about.jpg", width: 1200, height: 630, alt: DOCTOR_NAME }],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: defaultTitle,
+    description: SITE_DESCRIPTION,
+    images: ["/about.jpg"],
+  },
 };
 
 export default function RootLayout({
@@ -21,6 +60,28 @@ export default function RootLayout({
 }: {
   children: React.ReactNode;
 }) {
+  const physicianJsonLd = {
+    "@context": "https://schema.org",
+    "@type": "Physician",
+    name: DOCTOR_NAME,
+    image: `${SITE_URL}/about.jpg`,
+    url: SITE_URL,
+    medicalSpecialty: "Interventional Radiology",
+    address: {
+      "@type": "PostalAddress",
+      name: CLINIC.name,
+      streetAddress: CLINIC.address,
+      addressLocality: "Karachi",
+      addressCountry: "PK",
+    },
+    geo: {
+      "@type": "GeoCoordinates",
+      latitude: CLINIC.latitude,
+      longitude: CLINIC.longitude,
+    },
+    openingHours: "Mo,Tu,Fr,Sa 18:00-20:00",
+  };
+
   return (
     <html lang="en">
       <body
@@ -37,14 +98,29 @@ export default function RootLayout({
           {children}
         </main>
 
-        {/* Floating WhatsApp */}
+        {/* Floating WhatsApp (single instance, site-wide) */}
         <FloatingWhatsApp />
+
+        {/* FAQ Chatbot */}
+        <Chatbot />
 
         {/* Footer */}
         <Footer />
+
+        {/* Structured data for Google (Physician / local business) */}
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(physicianJsonLd) }}
+        />
+
+        {/* Google AdSense */}
+        <Script
+          async
+          strategy="afterInteractive"
+          src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6462611446094651"
+          crossOrigin="anonymous"
+        />
       </body>
-      <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6462611446094651"
-     crossOrigin="anonymous"></script>
     </html>
   );
 }
