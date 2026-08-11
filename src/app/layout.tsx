@@ -1,6 +1,5 @@
 import "./globals.css";
 import type { Metadata } from "next";
-import Script from "next/script";
 import { Poppins } from "next/font/google";
 import Navbar from "../components/Navbar";
 import FloatingWhatsApp from "../components/FloatingWhatsApp";
@@ -84,6 +83,18 @@ export default function RootLayout({
 
   return (
     <html lang="en">
+      <head>
+        {/* Google AdSense — rendered as a literal <script> tag in the
+            server HTML <head> (not via next/script, which only registers a
+            client-side loader and never emits this literal tag). Google's
+            site-verification crawler does a plain HTML fetch and looks for
+            this exact tag, so it must be present in the raw markup. */}
+        <script
+          async
+          src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6462611446094651"
+          crossOrigin="anonymous"
+        />
+      </head>
       <body
         className={`${poppins.className} relative bg-gradient-to-br from-blue-900 via-purple-900 to-blue-800 text-white`}
       >
@@ -111,14 +122,6 @@ export default function RootLayout({
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(physicianJsonLd) }}
-        />
-
-        {/* Google AdSense */}
-        <Script
-          async
-          strategy="afterInteractive"
-          src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6462611446094651"
-          crossOrigin="anonymous"
         />
       </body>
     </html>
