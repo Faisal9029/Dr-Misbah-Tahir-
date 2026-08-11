@@ -2,6 +2,16 @@
   command = "npm run build"
   publish = ".next"
 
+# Serve ads.txt directly on the bare (non-www) domain — Google's AdSense
+# ads.txt crawler checks the exact registered domain (innovativemisbahtahir.com,
+# no www) and does not reliably follow the www redirect below, which was
+# causing AdSense to report the ads.txt status as "Not found".
+[[redirects]]
+  from = "https://innovativemisbahtahir.com/ads.txt"
+  to = "/ads.txt"
+  status = 200
+  force = true
+
 [[redirects]]
   from = "https://innovativemisbahtahir.com/*"
   to = "https://www.innovativemisbahtahir.com/:splat"
